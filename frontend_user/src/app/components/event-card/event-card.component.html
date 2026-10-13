@@ -1,0 +1,86 @@
+<ion-card class="event-card" [class.compact]="compact" (click)="onOpen()">
+  <div class="hero">
+    <ion-img
+      [src]="heroImage"
+      class="hero-img"
+      alt="Image de l'événement"
+    ></ion-img>
+    <div class="overlay"></div>
+
+    <div class="top-row">
+      <ion-badge
+        [color]="isPast ? 'medium' : isOngoing ? 'success' : 'primary'"
+        class="status"
+      >
+        {{ statusLabel }}
+      </ion-badge>
+      <!-- AFFICHAGE DES BUTTON LIKE ET PARTAGER-->
+      <!--
+      <div class="actions">
+        <ion-button
+          fill="clear"
+          size="small"
+          class="icon-btn"
+          (click)="$event.stopPropagation(); onFavorite()"
+        >
+          <ion-icon name="heart-outline"></ion-icon>
+        </ion-button>
+        <ion-button
+          fill="clear"
+          size="small"
+          class="icon-btn"
+          (click)="$event.stopPropagation(); onShare()"
+        >
+          <ion-icon name="share-outline"></ion-icon>
+        </ion-button>
+      </div>
+    --></div>
+
+    <div class="title-wrap">
+      <ion-card-title class="title">{{ event.eve_nom }}</ion-card-title>
+      <ion-card-subtitle class="subtitle">
+        <ion-icon name="calendar-outline"></ion-icon>
+        <span>{{ dateRangeShort }}</span>
+      </ion-card-subtitle>
+
+      @if(countdownLabel) {
+      <ion-chip color="light" class="countdown">
+        <ion-icon name="time-outline"></ion-icon>
+        <ion-label>{{ countdownLabel }}</ion-label>
+      </ion-chip>
+      }
+    </div>
+  </div>
+  @if(showInformations){
+  <ion-card-content class="content">
+    <div class="venue">
+      @if(showVenueLogo && venueLogo) {
+      <ion-avatar class="venue-avatar">
+        <img [src]="venueLogo" alt="Logo établissement" />
+      </ion-avatar>
+      }
+
+      <div class="venue-text">
+        <div class="venue-name">{{ venueName }}</div>
+
+        @if(venueAddress) {
+        <div class="venue-address">
+          <ion-icon name="location-outline"></ion-icon>
+          <span>{{ venueAddress }}</span>
+        </div>
+        }
+      </div>
+
+      <ion-button fill="clear" size="small" class="cta">
+        Détails <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-button>
+    </div>
+
+    @if(event.eve_description) {
+    <p class="description">
+      {{ event.eve_description }}
+    </p>
+    }
+  </ion-card-content>
+  }
+</ion-card>

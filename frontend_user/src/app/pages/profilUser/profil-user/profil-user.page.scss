@@ -1,0 +1,228 @@
+ion-content,
+.ion-page,
+ion-card,
+ion-card-content,
+ion-card-header,
+:host {
+  contain: none !important;
+  overflow: visible !important; /* pour s'assurer que le contenu dépasse */
+}
+
+ion-content {
+  --background: #f0f2f5;
+}
+
+.profile-bg {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  filter: blur(12px);
+  z-index: -1;
+}
+
+.profile-card {
+  margin: 120px 16px 16px 16px;
+  border-radius: 20px;
+  padding-top: 60px;
+  text-align: center;
+  overflow: visible; /* important */
+  position: relative; /* pour l'image flottante */
+}
+
+.profile-img-wrapper {
+  position: absolute;
+  top: -60px; /* dépassement au-dessus de la card */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid white;
+  z-index: 10; /* au-dessus de la card */
+}
+
+.profile-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.profile-email {
+  font-size: 0.95rem;
+  color: #666;
+}
+
+/* Garde la classe btn-modify existante */
+.btn-modify {
+  width: 50%;
+  display: block;
+  margin: 16px auto;
+  border-radius: 25px;
+}
+
+.edit-profile-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.edit-input {
+  width: 50%;
+  max-width: 300px;
+  margin-bottom: 8px;
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --border-radius: 25px;
+  --highlight-color-focused: var(
+    --ion-color-primary
+  ); /* Ligne bleue au focus */
+
+  border: 1px solid var(--ion-color-step-200);
+  background: #fff;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 12px;
+
+  ion-button {
+    --border-radius: 12px;
+  }
+}
+
+///Comment content styles //
+///
+.comments-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.comments-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.see-more-link {
+  font-size: 0.95rem;
+  color: #3880ff;
+  text-decoration: underline;
+}
+
+.comments-list-centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+ion-list {
+  width: 100%;
+  max-width: 500px;
+}
+
+.comment-bubble {
+  background: #f8f9fa;
+  border-radius: 18px;
+  margin: 12px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  padding: 12px 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.comment-text {
+  font-weight: 500;
+  font-size: 1.05rem;
+  text-align: center;
+}
+
+.comment-user {
+  font-size: 0.9em;
+  color: #888;
+  text-align: center;
+  margin-top: 4px;
+}
+
+/// Favorites styles ///
+///
+.favorite-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.favorite-col {
+  padding: 8px;
+}
+
+.favorite-card-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px;
+}
+
+.favorite-img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.favorite-info {
+  flex: 1;
+
+  .favorite-name {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 4px;
+  }
+
+  .favorite-address {
+    font-size: 0.85rem;
+    color: var(--ion-color-medium);
+  }
+}
+
+.favorite-delete-btn {
+  --padding-start: 0;
+  --padding-end: 0;
+  --border-radius: 50%;
+}
+
+///Empty message
+///
+.empty-message {
+  text-align: center;
+  margin-top: 3rem;
+  color: var(--ion-color-medium);
+
+  ion-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--ion-color-danger);
+  }
+
+  p {
+    font-size: 1.2rem;
+  }
+}

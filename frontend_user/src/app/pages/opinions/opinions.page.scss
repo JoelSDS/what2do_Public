@@ -1,0 +1,52 @@
+.content-marge {
+  margin-top: 80px;
+}
+
+.comment {
+  font-size: 1.2rem;
+  color: var(--ion-color-primary);
+  quotes: "“" "”";
+
+  &::before {
+    content: open-quote;
+  }
+  &::after {
+    content: close-quote;
+  }
+}
+
+.stars {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.estab-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+
+  .estab-name {
+    font-weight: bold;
+  }
+
+  ion-avatar {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* --- EMPTY STATE --- */
+.empty-state {
+  text-align: center;
+  margin-top: 50px;
+  padding: 16px;
+  color: var(--color-primary);
+
+  h3 {
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin: 0;
+    color: var(--color-primary);
+  }
+}

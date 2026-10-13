@@ -1,0 +1,79 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab-events"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ event?.eve_nom }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="event-details">
+  @if (event) {
+  <!-- Image hero -->
+  <div class="hero">
+    <ion-img [src]="event.eve_images?.[0]" alt="Image de l'événement"></ion-img>
+    <ion-badge
+      [color]="isPast ? 'medium' : isOngoing ? 'success' : 'primary'"
+      class="status"
+    >
+      {{ statusLabel }}
+    </ion-badge>
+  </div>
+
+  <div class="container">
+    <!-- Nom et établissement -->
+    <h1>{{ event.eve_nom }}</h1>
+    <div class="venue">
+      @if (event.eve_eta_id.eta_logo) {
+      <ion-avatar>
+        <img [src]="event.eve_eta_id.eta_logo" alt="Logo établissement" />
+      </ion-avatar>
+      }
+      <div class="venue-info">
+        <h2>{{ event.eve_eta_id.eta_name }}</h2>
+        <p>
+          <ion-icon name="location-outline"></ion-icon>
+          {{ event.eve_eta_id.eta_address }}
+        </p>
+      </div>
+    </div>
+
+    <!-- Dates -->
+    <div class="dates">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <span>
+        {{ event.eve_date_debut | date:'fullDate' }} – {{ event.eve_date_fin |
+        date:'fullDate' }}
+      </span>
+    </div>
+
+    <!-- Description -->
+    @if (event.eve_description) {
+    <h3>À propos</h3>
+    <p class="description">{{ event.eve_description }}</p>
+    }
+
+    <!-- Galerie images (si >1) -->
+    @if ((event.eve_images?.length ?? 0) > 1) {
+    <h3>Galerie</h3>
+    <swiper-container
+      pagination="true"
+      navigation="true"
+      autoplay="true"
+      autoplay-delay="3000"
+      loop="true"
+      class="details-swiper"
+    >
+      @for (img of event.eve_images; track img) {
+      <swiper-slide>
+        <img [src]="img" alt="slide image" />
+      </swiper-slide>
+      }
+    </swiper-container>
+
+    }
+  </div>
+  } @else {
+  <ion-spinner name="crescent" class="loading"></ion-spinner>
+  }
+</ion-content>

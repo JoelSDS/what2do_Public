@@ -1,0 +1,67 @@
+ion-content {
+  --overflow: hidden; /* Variable CSS d'Ionic */
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--color-background);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.4rem;
+  margin-top: 10px;
+}
+
+.login-btn {
+  margin-top: 20px;
+  --border-radius: 12px;
+}
+
+/* Responsive tablette & desktop */
+@media (min-width: 768px) {
+  .login-card {
+    padding: 10px;
+  }
+}
+
+.forgotPass {
+  display: block;
+  text-align: center;
+  margin-top: 16px;
+  color: #007bff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.error-text {
+  display: inline-block;
+  color: red;
+  font-size: 0.8rem;
+  margin-left: 16px;
+}
+//pours les erreurs mdp
+.error-list {
+  margin: 0 0 0 40px;
+  padding-left: 0;
+  list-style-type: disc;
+}
+
+ion-segment-content {
+  display: none;
+}
+
+ion-segment-content.active {
+  display: block;
+}

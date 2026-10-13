@@ -1,0 +1,97 @@
+.event-details {
+  --padding-start: 0;
+  --padding-end: 0;
+
+  .hero {
+    position: relative;
+    height: 220px;
+
+    ion-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .status {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      font-size: 0.9rem;
+      padding: 6px 10px;
+      border-radius: 8px;
+    }
+  }
+
+  .container {
+    padding: 16px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .venue {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+
+    ion-avatar {
+      width: 48px;
+      height: 48px;
+    }
+
+    .venue-info h2 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .venue-info p {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.85rem;
+      color: var(--ion-color-medium);
+      margin: 0;
+    }
+  }
+
+  .dates {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+
+  h3 {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  .description {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--ion-color-dark);
+  }
+
+  .details-swiper {
+    margin-top: 10px;
+    height: 200px;
+
+    img {
+      object-fit: cover;
+      height: 100%;
+      border-radius: 8px;
+    }
+  }
+
+  .loading {
+    display: block;
+    margin: 50% auto;
+  }
+}

@@ -1,0 +1,194 @@
+.establishment-card {
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--ion-card);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+}
+
+/* HERO (swiper) */
+.estab-hero {
+  position: relative;
+  height: 180px; /* tu peux mettre 220px si tu veux comme event-card */
+}
+
+.estab-swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.estab-swiper-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(1.05);
+  transform: scale(1.01);
+}
+
+/* Overlay façon event-card */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 10%,
+      rgba(0, 0, 0, 0.55) 65%,
+      rgba(0, 0, 0, 0.85) 100%
+    ),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15));
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Ligne supérieure: badge + like */
+.image-card {
+  position: relative; /* cadre pour les positions absolues */
+}
+
+/* Badge catégorie: on conserve ton style + position indépendante */
+.estab-category {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+
+  --background: rgba(255, 255, 255, 0.15);
+  --color: #fff;
+  backdrop-filter: blur(8px);
+  padding: 6px 10px;
+  border-radius: 999px;
+  text-transform: none;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  z-index: 2;
+}
+
+/* Conteneur de l'image pour que les positions absolues soient relatives */
+.image-card {
+  position: relative; /* cadre pour les positions absolues */
+}
+
+/* Badge catégorie: on conserve ton style + position indépendante */
+.estab-category {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+
+  --background: rgba(255, 255, 255, 0.15);
+  --color: #fff;
+  backdrop-filter: blur(8px);
+  padding: 6px 10px;
+  border-radius: 999px;
+  text-transform: none;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  z-index: 2;
+}
+
+/* Favori collé au bord droit, fond blanc carré */
+.fav-btn {
+  all: unset;
+  position: absolute;
+  top: 12px;
+  right: 0; /* collé au rebord */
+  width: 40px;
+  height: 40px;
+  background: #fff; /* fond blanc carré */
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 6px; /* mets 0 si tu veux strictement carré */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+
+  img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    transition: transform 0.2s ease;
+  }
+
+  &:active img {
+    transform: scale(0.9);
+  }
+}
+
+/* CONTENU (aligné sur event-card) */
+.estab-content {
+  position: relative;
+  padding: 14px 14px 16px 14px !important;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.estab-avatar {
+  width: 36px;
+  height: 36px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.estab-text {
+  flex: 1;
+  min-width: 0;
+
+  .estab-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+
+  .estab-name {
+    font-weight: 700;
+    font-size: 14.5px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .estab-desc {
+    margin-top: 2px;
+    color: var(--ion-color-step-600, #8e8e93);
+    line-height: 1.4;
+    display: -webkit-box;
+    line-clamp: 4;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+/* Optionnel: compact */
+.establishment-card.compact .estab-hero {
+  height: 170px;
+}
+
+.estab-status {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  z-index: 2;
+
+  &.open {
+    color: var(--ion-color-success);
+  }
+
+  &.closed {
+    color: var(--ion-color-danger);
+  }
+}
+
+.cta {
+  font-weight: 600;
+}

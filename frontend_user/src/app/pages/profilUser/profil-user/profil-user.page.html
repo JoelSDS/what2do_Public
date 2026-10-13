@@ -1,0 +1,157 @@
+<ion-content>
+  <!-- Background flou -->
+  <div
+    class="profile-bg"
+    [style.background-image]="'url(' + (editedUser.uti_image || 'assets/defaultProfile.jpg') + ')'"
+  ></div>
+
+  <!-- Card principale flottante -->
+  <ion-card class="profile-card">
+    <!-- Image centrée flottante -->
+    <div class="profile-img-wrapper">
+      <!-- <img [src]="getProfileImage()" alt="Profile" class="profile-img" /> -->
+      <img
+        [src]="editedUser.uti_image || 'assets/defaultProfile.jpg'"
+        alt="Photo de profil"
+        class="photo-profil"
+      />
+    </div>
+
+    <!-- Bouton / Formulaire profil -->
+    <ion-card-content>
+      @if (!isEditingProfile) {
+      <!-- Nom et email -->
+      <ion-card-header>
+        <ion-card-title class="profile-name"
+          >{{ editedUser.uti_surname}} {{editedUser.uti_name}}</ion-card-title
+        >
+        <ion-card-subtitle class="profile-email"
+          >{{user?.uti_mail}}</ion-card-subtitle
+        >
+      </ion-card-header>
+      <ion-button
+        expand="block"
+        color="primary"
+        class="btn-modify"
+        (click)="startEditingProfile()"
+      >
+        Modifier le profil
+      </ion-button>
+      } @else {
+      <div class="edit-profile-wrapper">
+        <a
+          class="see-more-link"
+          (click)="openFilePicker()"
+          style="cursor: pointer"
+        >
+          Changer
+        </a>
+        <!-- Input file caché -->
+        <input
+          type="file"
+          accept="image/*"
+          #fileInput
+          (change)="onFileSelected($event)"
+          hidden
+        />
+
+        <ion-input
+          class="edit-input"
+          [(ngModel)]="editedUser.uti_name"
+          placeholder="Nom"
+          ngDefaultControl
+        ></ion-input>
+
+        <ion-input
+          class="edit-input"
+          [(ngModel)]="editedUser.uti_surname"
+          placeholder="Prénom"
+          ngDefaultControl
+        ></ion-input>
+
+        <div class="btn-group">
+          <ion-button
+            fill="outline"
+            color="medium"
+            (click)="cancelEditingProfile()"
+          >
+            Annuler
+          </ion-button>
+          <ion-button (click)="saveProfile()"> Enregistrer </ion-button>
+        </div>
+      </div>
+      }
+    </ion-card-content>
+
+    <!-- Commentaires récents -->
+    <ion-card-content>
+      <div class="comments-header-row">
+        <h3 class="comments-title">Commentaires récents</h3>
+        <a
+          class="see-more-link"
+          (click)="showAllComments()"
+          style="cursor: pointer"
+          >Voir plus</a
+        >
+      </div>
+      <div class="comments-list-centered">
+        <ion-list>
+          @for(opinion of opinions | slice:0:3; track opinion) {
+          <ion-item class="comment-bubble">
+            <ion-label>
+              <div class="comment-text">" {{ opinion.opi_com }} "</div>
+              <div class="comment-user">
+                - {{ opinion.opi_eta_id.eta_name || 'Établissement inconnu' }}
+              </div>
+            </ion-label>
+          </ion-item>
+          }
+        </ion-list>
+      </div>
+    </ion-card-content>
+
+    <!-- Favoris -->
+    <ion-card-content>
+      <h3 class="favorite-title">Favoris</h3>
+      <ion-grid>
+        @if(favorites && favorites.length > 0){
+        <ion-row>
+          @for(fav of favorites; track fav ) {
+          <ion-col size="12" size-md="6" class="favorite-col">
+            <ion-card class="favorite-card">
+              <div class="favorite-card-content">
+                <img
+                  [src]="fav.fav_eta_id.eta_logo"
+                  alt="Logo établissement"
+                  class="favorite-img"
+                />
+
+                <div class="favorite-info">
+                  <div class="favorite-name">{{ fav.fav_eta_id.eta_name }}</div>
+                  <div class="favorite-address">
+                    {{ fav.fav_eta_id.eta_address || 'Adresse inconnue' }}
+                  </div>
+                </div>
+
+                <ion-button
+                  fill="clear"
+                  color="danger"
+                  class="favorite-delete-btn"
+                  (click)="presentDeleteAlert(fav.fav_eta_id._id)"
+                >
+                  <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+                </ion-button>
+              </div>
+            </ion-card>
+          </ion-col>
+          }
+        </ion-row>
+        }@else {
+        <div class="empty-message">
+          <p>Vous n’avez encore aucun favoris...</p>
+        </div>
+        }
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

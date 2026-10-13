@@ -1,0 +1,133 @@
+<ion-content>
+  <ion-card class="profile-card">
+    <form [formGroup]="establishmentForm" (ngSubmit)="saveChanges()">
+      <h3>Modification du profil</h3>
+      <!-- Nom -->
+      <ion-item class="form-item">
+        <ion-label position="stacked">Nom</ion-label>
+        <ion-input formControlName="eta_name"></ion-input>
+      </ion-item>
+      @if(establishmentForm.get('eta_name')?.invalid &&
+      establishmentForm.get('eta_name')?.touched){
+      <div class="error">Le nom est requis.</div>
+      }
+
+      <!-- Email (lecture seule) -->
+      <ion-item class="form-item">
+        <ion-label position="stacked">Email</ion-label>
+        <div class="readonly-mail">
+          <ion-icon name="mail-outline"></ion-icon>
+          <span>{{ updatedEstablishment?.eta_mail }}</span>
+        </div>
+      </ion-item>
+
+      <!-- Logo -->
+      <div class="form-row">
+        <ion-button size="small" (click)="logoInput.click()"
+          >Importer le logo</ion-button
+        >
+        <input
+          type="file"
+          accept="image/*"
+          hidden
+          #logoInput
+          (change)="onLogoSelected($event)"
+        />
+      </div>
+      @if(updatedEstablishment?.eta_logo){
+      <div class="image-preview">
+        <img [src]="updatedEstablishment?.eta_logo" alt="Logo" />
+        <ion-icon name="close-circle" (click)="removeLogo()"></ion-icon>
+      </div>
+      }
+
+      <!-- Description -->
+      <ion-item class="form-item">
+        <ion-label position="stacked">Description de l'établissement</ion-label>
+        <ion-textarea
+          formControlName="eta_description"
+          autoGrow="true"
+        ></ion-textarea>
+      </ion-item>
+
+      <!-- Adresse -->
+      <ion-item class="form-item">
+        <ion-label position="stacked">Adresse</ion-label>
+        <ion-input formControlName="eta_address"></ion-input>
+      </ion-item>
+
+      <!-- Téléphone -->
+      <ion-item class="form-item">
+        <ion-label position="stacked">Téléphone</ion-label>
+        <ion-input formControlName="eta_tel" inputmode="tel"></ion-input>
+      </ion-item>
+      @if(establishmentForm.get('eta_tel')?.invalid &&
+      establishmentForm.get('eta_tel')?.touched){
+      <div class="error">Autorisé: chiffres et + uniquement.</div>
+      }
+
+      <!-- Photos -->
+      <div class="form-row">
+        <ion-button size="small" (click)="photosInput.click()"
+          >Importer des photos</ion-button
+        >
+        <input
+          type="file"
+          accept="image/*"
+          multiple
+          hidden
+          #photosInput
+          (change)="onPhotosSelected($event)"
+        />
+      </div>
+
+      <div class="photos-preview-grid">
+        @for (photo of updatedEstablishment?.eta_photos; track $index) {
+        <div class="photo-thumb">
+          <img [src]="photo" alt="Photo" />
+          <ion-icon
+            name="close-circle"
+            (click)="removePhoto($index)"
+          ></ion-icon>
+        </div>
+        }
+      </div>
+
+      <!-- Horaires -->
+      <ion-item class="form-item">
+        <ion-label position="stacked">Horaires d'ouverture</ion-label>
+        <ion-textarea
+          formControlName="eta_opening_hours"
+          placeholder="Ex: Lun-Ven 09:00-18:00"
+          autoGrow="true"
+        ></ion-textarea>
+      </ion-item>
+
+      <!-- Catégorie -->
+      <ion-item class="form-item">
+        <ion-label position="stacked">Catégorie</ion-label>
+        <ion-select formControlName="eta_cat_id">
+          @for (cat of categories; track cat.id) {
+          <ion-select-option [value]="cat.id"
+            >{{ cat.cat_name }}</ion-select-option
+          >
+          }
+        </ion-select>
+      </ion-item>
+
+      <!-- Actions -->
+      <div class="btn-group">
+        <ion-button
+          fill="outline"
+          color="medium"
+          (click)="cancelEdit()"
+          type="button"
+          >Annuler</ion-button
+        >
+        <ion-button type="submit" [disabled]="establishmentForm.invalid"
+          >Enregistrer</ion-button
+        >
+      </div>
+    </form>
+  </ion-card>
+</ion-content>

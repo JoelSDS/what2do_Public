@@ -1,0 +1,29 @@
+<ion-content>
+  @if(opinions.length === 0) {
+  <div class="empty-state">
+    <h3>Aucun Commentaire trouvé... 😔</h3>
+  </div>
+  } @else { @for(opinion of opinions; track opinion) {
+  <ion-card class="content-marge">
+    <ion-card-content>
+      <p class="comment">{{ opinion.opi_com }}</p>
+      <p class="stars">
+        @for(star of getStars(opinion.opi_note ?? 0); track star; let i =
+        $index) {
+        <ion-icon
+          name="star"
+          [color]="$index < (opinion.opi_note ?? 0) ? 'warning' : 'medium'"
+        >
+        </ion-icon>
+        }
+      </p>
+      <div class="estab-info">
+        <ion-avatar>
+          <img [src]="opinion.opi_eta_id.eta_logo" alt="Logo" />
+        </ion-avatar>
+        <span class="estab-name">{{ opinion.opi_eta_id.eta_name }}</span>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  } }
+</ion-content>

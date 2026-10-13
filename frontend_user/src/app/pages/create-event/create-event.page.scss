@@ -1,0 +1,89 @@
+/* Carte */
+.modif-card {
+  margin: 80px 16px 16px 16px;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Titres */
+h3 {
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--ion-color-primary);
+}
+
+/* Éléments du formulaire */
+.form-item {
+  margin-bottom: 14px;
+}
+
+/* Zone de bouton pour images */
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+/* Groupe de boutons */
+.btn-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+/* Boutons */
+ion-button {
+  --border-radius: 8px;
+}
+
+/* Miniature logo et photos avec close */
+.image-preview,
+.photo-thumb {
+  position: relative;
+  display: inline-block;
+  margin: 6px 6px 0 0;
+}
+
+.image-preview img,
+.photo-thumb img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+}
+
+.photo-thumb img {
+  width: 110px;
+  height: 110px;
+}
+
+ion-icon[name="close-circle"] {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  font-size: 22px;
+  color: var(--ion-color-danger);
+  cursor: pointer;
+  background: white;
+  border-radius: 50%;
+}
+
+.photos-preview-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+/* Messages d'erreur */
+.error {
+  color: var(--ion-color-danger);
+  font-size: 0.9rem;
+  margin: 6px 2px 0 2px;
+}

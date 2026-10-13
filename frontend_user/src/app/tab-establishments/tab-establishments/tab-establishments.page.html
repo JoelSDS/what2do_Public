@@ -1,0 +1,53 @@
+<ion-content>
+  <div class="search-bar-static">
+    <!-- Barre de recherche -->
+    <div class="searchbar-wrapper">
+      <ion-searchbar
+        placeholder="Rechercher..."
+        class="custom-searchbar"
+        [(ngModel)]="searchValue"
+        (keyup.enter)="onSearch()"
+        (ionInput)="onSearchClear($event)"
+      ></ion-searchbar>
+    </div>
+  </div>
+  <!--Filtres -->
+  <div class="filter">
+    <app-cat-filter
+      [categories]="categories"
+      [selectedCategory]="selectedCategory"
+      (categorySelected)="onCategorySelected($event)"
+    ></app-cat-filter>
+  </div>
+
+  <!-- Liste des établissements -->
+  @if(establishments.length > 0) {
+  <ion-grid class="estab-grid">
+    <ion-row>
+      @for (estab of establishments; track estab) {
+      <ion-col size="12" size-md="6" class="estab-col">
+        <app-establishment-card
+          [establishment]="estab"
+          [showLike]="isLoggedIn && isUserAccount"
+          [isFavorite]="isFavorite(estab.id!)"
+          (toggleFavorite)="onToggleFavorite($event)"
+          (click)="goToDetails(estab.id!)"
+        ></app-establishment-card>
+      </ion-col>
+      }
+    </ion-row>
+  </ion-grid>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Chargement..."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  } @else {
+  <div class="empty-state">
+    <h3>Aucun établissement trouvé... 😔</h3>
+  </div>
+  }
+</ion-content>

@@ -1,0 +1,30 @@
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="tab-events" href="/tabs/tab-events">
+      <ion-icon aria-hidden="true" name="today-outline"></ion-icon>
+      <ion-label>Événements</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tab-establishments" href="/tabs/tab-establishments">
+      <ion-icon aria-hidden="true" name="business-outline"></ion-icon>
+      <ion-label>Établissements</ion-label>
+    </ion-tab-button>
+
+    @if(!isLoggedIn){
+    <ion-tab-button tab="login" href="/tabs/login">
+      <ion-icon aria-hidden="true" name="log-in-outline"></ion-icon>
+      <ion-label>Login</ion-label>
+    </ion-tab-button>
+    } @else if (isLoggedIn && accountType === 'User' && userId) {
+    <ion-tab-button tab="profil-user" href="/tabs/profil-user/' + userId">
+      <ion-icon aria-hidden="true" name="person-circle-outline"></ion-icon>
+      <ion-label>Mon Profil</ion-label>
+    </ion-tab-button>
+    } @else if (isLoggedIn && accountType === 'Establishment' && userId) {
+    <ion-tab-button tab="profil-estab" href="/tabs/profil-estab">
+      <ion-icon aria-hidden="true" name="person-circle-outline"></ion-icon>
+      <ion-label>Mon Profil</ion-label>
+    </ion-tab-button>
+    }
+  </ion-tab-bar>
+</ion-tabs>

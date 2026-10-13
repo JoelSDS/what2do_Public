@@ -1,0 +1,145 @@
+.details-page {
+  --padding-start: 0;
+  --padding-end: 0;
+
+  .details-hero {
+    position: relative;
+    height: 220px;
+
+    ion-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .details-container {
+    padding: 16px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .details-venue {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+
+    ion-avatar {
+      width: 48px;
+      height: 48px;
+    }
+
+    .details-venue-info p {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      color: var(--ion-color-medium);
+      margin: 4px 0;
+    }
+  }
+
+  .details-category {
+    margin-bottom: 12px;
+  }
+
+  .details-hours {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+
+  h3 {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  .details-description {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--ion-color-dark);
+  }
+
+  .details-swiper {
+    margin-top: 10px;
+    height: 200px;
+
+    img {
+      object-fit: cover;
+      height: 100%;
+      border-radius: 8px;
+    }
+  }
+
+  .details-loading {
+    display: block;
+    margin: 50% auto;
+  }
+}
+///Comment
+///
+
+.comment-box {
+  margin: 24px 16px;
+  padding: 16px;
+  background: var(--ion-color-light);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+  h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--ion-color-dark);
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+
+    label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 6px;
+      color: var(--ion-color-medium);
+    }
+
+    select,
+    textarea {
+      width: 100%;
+      font-size: 1rem;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid var(--ion-color-step-200);
+      background: #fff;
+      font-family: inherit;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .rating-select {
+      max-width: 120px;
+    }
+  }
+
+  .btn-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 20px;
+
+    ion-button {
+      --border-radius: 12px;
+    }
+  }
+}

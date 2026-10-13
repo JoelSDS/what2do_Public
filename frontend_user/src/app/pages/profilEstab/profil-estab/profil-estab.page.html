@@ -1,0 +1,157 @@
+<ion-content [fullscreen]="true">
+  <!-- Mode lecture -->
+  <!-- Background flou -->
+  <div
+    class="profile-bg"
+    [style.background-image]="'url(' + (establishmentAsEstab?.eta_logo || 'assets/defaultEstablishment.png') + ')'"
+  ></div>
+
+  <!-- Card principale flottante -->
+  <ion-card class="profile-card">
+    <!-- Icône édition en haut à droite -->
+    <ion-button fill="clear" class="edit-icon" (click)="onEditProfile()">
+      <ion-icon name="create-outline"></ion-icon>
+    </ion-button>
+
+    <!-- Image centrée flottante -->
+    <div class="profile-img-wrapper">
+      <img
+        [src]="establishmentAsEstab?.eta_logo || 'assets/defaultEstablishment.png'"
+        alt="Photo établissement"
+        class="profile-img"
+      />
+    </div>
+
+    <!-- Nom -->
+    <ion-card-header>
+      <ion-card-title class="profile-name">
+        {{ establishmentAsEstab?.eta_name }}
+      </ion-card-title>
+    </ion-card-header>
+
+    <!-- Adresse -->
+    @if(establishmentAsEstab?.eta_address){
+    <div class="profile-address">
+      <ion-icon name="location-outline"></ion-icon>
+      {{ establishmentAsEstab?.eta_address }}
+    </div>
+    }
+
+    <!-- Téléphone -->
+    @if(establishmentAsEstab?.eta_tel){
+    <div class="profile-tel">
+      <ion-icon name="call-outline"></ion-icon>
+      {{ establishmentAsEstab?.eta_tel }}
+    </div>
+    }
+
+    <!-- Email -->
+    @if(establishmentAsEstab?.eta_mail){
+    <div class="profile-email">
+      <ion-icon name="mail-outline"></ion-icon>
+      {{ establishmentAsEstab?.eta_mail }}
+    </div>
+    }
+
+    <!-- Badge catégorie -->
+    @if (establishmentAsEstab ) {
+    <div class="category-badge">
+      <img
+        [src]="getCategoryCode(establishmentAsEstab.eta_cat_id || '')"
+        alt="Catégorie"
+      />
+      <span
+        >{{ getCategoryName(establishmentAsEstab.eta_cat_id|| '') || 'Inconnue'
+        }}</span
+      >
+    </div>
+    }
+
+    <!-- Description -->
+    @if(establishmentAsEstab?.eta_description){
+    <ion-card-content>
+      <h3>Description</h3>
+      <p>{{ establishmentAsEstab?.eta_description }}</p>
+    </ion-card-content>
+    }
+
+    <!-- Horaires -->
+    @if(establishmentAsEstab?.eta_opening_hours){
+    <ion-card-content>
+      <h3>Horaires d'ouverture</h3>
+      <p>{{ establishmentAsEstab?.eta_opening_hours }}</p>
+    </ion-card-content>
+    }
+
+    <!-- Galerie photos -->
+    @if((establishmentAsEstab?.eta_photos?.length ?? 0) >= 1){
+    <ion-card-content>
+      <h3>Photos</h3>
+      <ion-grid>
+        <ion-row>
+          @for(photo of establishmentAsEstab?.eta_photos; track photo ){
+          <ion-col size="6" size-md="3" class="photo-col">
+            <img
+              [src]="photo"
+              alt="Photo établissement"
+              class="gallery-photo"
+            />
+          </ion-col>
+          }
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+    }
+  </ion-card>
+  <ion-card>
+    <ion-card-content>
+      <!-- Toujours affiché -->
+      <div class="events-header">
+        <h3>Evénements</h3>
+
+        <ion-button fill="clear" class="add-icon" (click)="addNewEvent()">
+          Nouvel Événement
+          <ion-icon name="add-circle-outline"></ion-icon>
+        </ion-button>
+      </div>
+
+      <!-- Contenu conditionnel -->
+      @if (eventsList.length > 0) {
+      <div class="events-grid">
+        @for (ev of eventsList; track ev;) {
+        <div class="event-wrapper">
+          <app-event-card
+            [event]="ev"
+            [compact]="false"
+            [showInformations]="false"
+          ></app-event-card>
+          @if(ev.id){
+          <div class="event-actions">
+            <ion-icon
+              name="create-outline"
+              (click)="onEditEvent(ev.id)"
+            ></ion-icon>
+            <ion-icon
+              name="trash-outline"
+              (click)="onDeleteEvent(ev.id)"
+            ></ion-icon>
+          </div>
+          }
+        </div>
+        }
+      </div>
+
+      <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMore($event)">
+        <ion-infinite-scroll-content
+          loadingSpinner="bubbles"
+          loadingText="Chargement..."
+        ></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+      } @else {
+      <div class="empty-state">
+        <h3>Aucun événement trouvé... 😔</h3>
+      </div>
+      }
+    </ion-card-content>
+  </ion-card>
+</ion-content>

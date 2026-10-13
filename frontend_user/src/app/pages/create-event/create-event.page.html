@@ -1,0 +1,103 @@
+<ion-content>
+  <ion-card class="modif-card">
+    <form [formGroup]="eventForm" (ngSubmit)="saveEvent()">
+      <h3>Création d'un événement</h3>
+
+      <!-- Nom de l'événement -->
+      <ion-item class="form-item">
+        <ion-label position="stacked">Nom de l'événement</ion-label>
+        <ion-input formControlName="eve_nom" ngDefaultControl></ion-input>
+      </ion-item>
+      @if(eventForm.get('eve_nom')?.invalid &&
+      eventForm.get('eve_nom')?.touched) {
+      <div class="error">Le nom est requis.</div>
+      }
+
+      <!-- Description -->
+      <ion-item class="form-item">
+        <ion-label position="stacked">Description</ion-label>
+        <ion-textarea
+          formControlName="eve_description"
+          autoGrow="true"
+          ngDefaultControl
+        ></ion-textarea>
+      </ion-item>
+
+      <!-- Date début -->
+      <ion-item class="form-item">
+        <ion-label position="stacked">Date de début</ion-label>
+        <ion-input
+          type="date"
+          formControlName="eve_date_debut"
+          ngDefaultControl
+        >
+        </ion-input>
+      </ion-item>
+
+      <!-- Date fin -->
+      <ion-item class="form-item">
+        <ion-label position="stacked">Date de fin</ion-label>
+        <ion-input type="date" formControlName="eve_date_fin" ngDefaultControl>
+        </ion-input>
+      </ion-item>
+      @if(eventForm.errors?.['dateRangeInvalid']) {
+      <div class="error">
+        La date de fin doit être postérieure à la date de début.
+      </div>
+      }
+
+      <!-- Catégorie -->
+      <ion-item class="form-item">
+        <ion-label position="stacked">Catégorie</ion-label>
+        <ion-select formControlName="eve_cat_id" placeholder="Sélectionner">
+          @for (cat of categories; track cat.id) {
+          <ion-select-option [value]="cat.id"
+            >{{ cat.cat_name }}</ion-select-option
+          >
+          }
+        </ion-select>
+      </ion-item>
+
+      <!-- Images -->
+      <div class="form-row">
+        <ion-button size="small" (click)="imagesInput.click()"
+          >Importer des images</ion-button
+        >
+        <input
+          type="file"
+          accept="image/*"
+          multiple
+          hidden
+          #imagesInput
+          (change)="onImagesSelected($event)"
+        />
+      </div>
+
+      <div class="photos-preview-grid">
+        @for (img of eventImages; track $index) {
+        <div class="photo-thumb">
+          <img [src]="img" alt="Image événement" />
+          <ion-icon
+            name="close-circle"
+            (click)="removeImage($index)"
+          ></ion-icon>
+        </div>
+        }
+      </div>
+
+      <!-- Actions -->
+      <div class="btn-group">
+        <ion-button
+          fill="outline"
+          color="medium"
+          (click)="cancel()"
+          type="button"
+          >Annuler</ion-button
+        >
+        <ion-button type="submit" [disabled]="eventForm.invalid"
+          >Créer</ion-button
+        >
+      </div>
+    </form>
+  </ion-card>
+</ion-content>

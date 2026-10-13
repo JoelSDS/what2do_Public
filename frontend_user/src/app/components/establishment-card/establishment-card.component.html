@@ -1,0 +1,77 @@
+<ion-card class="establishment-card">
+  <!-- HERO: Swiper d'images avec overlay + top row -->
+  <div class="estab-hero">
+    <swiper-container
+      [slides-per-view]="1"
+      pagination="true"
+      class="estab-swiper"
+    >
+      @if (establishment.eta_photos && establishment.eta_photos.length > 0) {
+      @for (photo of establishment.eta_photos; track photo) {
+      <swiper-slide>
+        <img [src]="photo" alt="Photo établissement" class="estab-swiper-img" />
+      </swiper-slide>
+      } } @else {
+      <swiper-slide>
+        <img
+          src="assets/defaultEstablishment.png"
+          alt="Photo établissement"
+          class="estab-swiper-img"
+        />
+      </swiper-slide>
+      }
+    </swiper-container>
+    <!-- badge catégorie, inchangé mais positionné seul -->
+    <ion-badge class="estab-category">{{
+      getCategoryName(establishment.eta_cat_id ?? "") || "Inconnue"
+    }}</ion-badge>
+
+    <!-- favori collé au rebord droit -->
+    @if(showLike){
+    <button
+      class="fav-btn"
+      (click)="$event.stopPropagation(); onClickFavorite()"
+      aria-label="Ajouter aux favoris"
+    >
+      <img
+        [src]="
+          isFavorite ? 'assets/like/likeFull.png' : 'assets/like/likeEmpty.png'
+        "
+        alt="Favori"
+      />
+    </button>
+    }
+    <div class="estab-status" [ngClass]="{ open: isOpen, closed: !isOpen }">
+      ● {{ isOpen ? "Ouvert" : "Fermé" }}
+    </div>
+
+    <!-- Overlay sombre pour lisibilité -->
+    <div class="overlay"></div>
+  </div>
+
+  <!-- CONTENU comme event-card (infos) -->
+  <ion-card-content class="estab-content">
+    <ion-avatar class="estab-avatar">
+      <img
+        [src]="establishment.eta_photos?.[0] || 'assets/defaultEstablishment.png'"
+        alt="Logo établissement"
+      />
+    </ion-avatar>
+
+    <div class="estab-text">
+      <div class="estab-header">
+        <div class="estab-name">{{ establishment.eta_name }}</div>
+      </div>
+
+      @if (establishment.eta_description) {
+      <p class="estab-desc">
+        {{ establishment.eta_description }}
+      </p>
+      }
+    </div>
+
+    <ion-button fill="clear" size="small" class="cta">
+      Détails <ion-icon name="chevron-forward-outline"></ion-icon>
+    </ion-button>
+  </ion-card-content>
+</ion-card>

@@ -1,0 +1,104 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/* Dark mode options */
+// @import "@ionic/angular/css/palettes/dark.always.css";
+// @import "@ionic/angular/css/palettes/dark.class.css";
+@import "@ionic/angular/css/palettes/dark.system.css";
+
+/* === Couleurs principales === */
+:root {
+  --color-primary: #6f4e37; /* brun café */
+  --color-background: #f5f5f5; /* whitesmoke */
+  --color-card: #f8f8ff; /* ghostwhite */
+
+  /* Pour que Ionic utilise directement ta couleur café comme primaire */
+  --ion-color-primary: #6f4e37;
+  --ion-color-primary-rgb: 111, 78, 55;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #52280c;
+  --ion-color-primary-tint: #7d604b;
+}
+
+/* === Map des catégories=== */
+$category-colors: (
+  culture: #b3b3ff,
+  // violet lavande foncé
+  loisirs: #ffb38a,
+  // corail plus chaud
+  sport: #a8d5a0,
+  // vert sauge foncé
+  soirees: #8ab6f2,
+  // bleu nuit un peu plus marqué
+  bienEtre: #d6b3c2 // rose poudré plus soutenu,,,,,,,,,,,,,,,,,,,,,,,,,,,
+);
+
+/* === Générateur automatique de classes === */
+@each $name, $color in $category-colors {
+  .category-#{$name} {
+    background-color: $color !important;
+    border-radius: 12px;
+    padding: 12px;
+    color: #333;
+  }
+}
+
+/* === Utilitaires généraux === */
+body {
+  background-color: var(--color-background);
+  font-family: "Inter", sans-serif;
+  margin: 0;
+}
+
+ion-content {
+  --background: var(--color-background);
+}
+
+.card {
+  background-color: var(--color-card);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* TAB BARRE Style */
+
+ion-tab-bar {
+  --background: var(--color-background); /* fond par défaut */
+  ion-tab-button {
+    --color: var(--ion-color-medium); /* couleur texte/icône par défaut */
+    --color-selected: var(--ion-color-primary); /* couleur texte/icône actif */
+    --background: var(--color-background); /* fond par défaut */
+    --background-focused: var(--color-background);
+
+    &.tab-selected {
+      font-weight: bold;
+      border-bottom: 3px solid var(--ion-color-primary); /* bordure visuelle */
+    }
+  }
+}

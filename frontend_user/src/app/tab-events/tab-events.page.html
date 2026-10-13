@@ -1,0 +1,60 @@
+<ion-content>
+  <!-- Barre de recherche -->
+  <div class="searchbar-wrapper">
+    <ion-searchbar
+      placeholder="Rechercher..."
+      class="custom-searchbar"
+      [(ngModel)]="searchValue"
+      (keyup.enter)="onSearch()"
+      (ionInput)="onSearchClear($event)"
+    ></ion-searchbar>
+  </div>
+  <div class="filter">
+    <app-cat-filter
+      [categories]="categories"
+      [selectedCategory]="selectedCategory"
+      (categorySelected)="onCategorySelected($event)"
+    ></app-cat-filter>
+  </div>
+
+  <!-- Liste des établissements -->
+  @if(eventsList.length > 0) {
+  <ion-grid class="grid">
+    <ion-row>
+      @for (ev of eventsList; track ev) {
+      <ion-col size="12" size-md="6" class="col">
+        <!--
+                <app-event-card
+          [event]="ev"
+          [compact]="false"
+          [showDescription]="true"
+          (open)="/* naviguer vers le détail */"
+          (favorite)="/* toggle favori */"
+          (share)="/* déclencher partage */"
+        ></app-event-card>
+        
+        -->
+        <app-event-card
+          [event]="ev"
+          [compact]="false"
+          [showInformations]="true"
+          (open)="router.navigate(['tabs/tab-events/event-details', ev.id])"
+        ></app-event-card>
+      </ion-col>
+      }
+    </ion-row>
+  </ion-grid>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Chargement..."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  } @else {
+  <div class="empty-state">
+    <h3>Aucun événement trouvé... 😔</h3>
+  </div>
+  }
+</ion-content>

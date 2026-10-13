@@ -1,0 +1,133 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab-establishments"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ establishment?.eta_name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="details-page">
+  @if (establishment) {
+  <!-- Hero image -->
+  <!--METTRE LE LOGO-->
+  <div class="details-hero">
+    <ion-img
+      [src]="establishment.eta_photos?.[0]"
+      alt="Photo de l'établissement"
+    ></ion-img>
+  </div>
+
+  <div class="details-container">
+    <!-- Nom + logo -->
+    <h1>{{ establishment.eta_name }}</h1>
+    <div class="details-venue">
+      @if (establishment.eta_logo) {
+      <ion-avatar>
+        <img [src]="establishment.eta_logo" alt="Logo établissement" />
+      </ion-avatar>
+      }
+      <div class="details-venue-info">
+        <p>
+          <ion-icon name="location-outline"></ion-icon>
+          {{ establishment.eta_address }}
+        </p>
+        <p>
+          <ion-icon name="call-outline"></ion-icon>
+          {{ establishment.eta_tel }}
+        </p>
+        <p>
+          <ion-icon name="mail-outline"></ion-icon>
+          {{ establishment.eta_mail }}
+        </p>
+      </div>
+    </div>
+
+    <!-- Catégorie -->
+    @if (establishment.eta_cat_id) {
+    <div class="details-category">
+      <ion-badge color="tertiary"
+        >{{ getCategoryName(establishment.eta_cat_id) || "Inconnue"
+        }}</ion-badge
+      >
+    </div>
+    }
+
+    <!-- Horaires -->
+    @if (establishment.eta_opening_hours) {
+    <div class="details-hours">
+      <ion-icon name="time-outline"></ion-icon>
+      <span>{{ establishment.eta_opening_hours }}</span>
+    </div>
+    }
+
+    <!-- Description -->
+    @if (establishment.eta_description) {
+    <h3>À propos</h3>
+    <p class="details-description">{{ establishment.eta_description }}</p>
+    }
+
+    <!-- Galerie -->
+    @if ((establishment.eta_photos?.length ?? 0) > 1) {
+    <h3>Galerie</h3>
+    <swiper-container
+      pagination="true"
+      navigation="true"
+      autoplay="true"
+      autoplay-delay="3000"
+      loop="true"
+      class="details-swiper"
+    >
+      @for (img of establishment.eta_photos; track img) {
+      <swiper-slide>
+        <img [src]="img" alt="Photo établissement" />
+      </swiper-slide>
+      }
+    </swiper-container>
+    }
+  </div>
+  } @else {
+  <ion-spinner name="crescent" class="details-loading"></ion-spinner>
+  }
+  <!--Comments-->
+  @if (isLoggedIn) {
+  <div class="comment-box">
+    <h3>Ton avis sur l’établissement</h3>
+
+    <div class="form-group">
+      <label for="rating">Note</label>
+      <div class="rating-select">
+        <select id="rating" [(ngModel)]="selectedRating">
+          @for (note of [1, 2, 3, 4, 5]; track note) {
+          <option [value]="note">{{ note }}</option>
+          }
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="comment">Commentaire</label>
+      <textarea
+        id="comment"
+        [(ngModel)]="comment"
+        placeholder="Exprime ton ressenti..."
+        rows="5"
+      ></textarea>
+    </div>
+
+    <div class="btn-group">
+      @if (userReview) {
+      <ion-button fill="outline" color="medium" (click)="presentDeleteAlert()">
+        Supprimer
+      </ion-button>
+      }
+      <ion-button
+        [disabled]="!selectedRating || !comment.trim()"
+        (click)="submitReview()"
+      >
+        Enregistrer
+      </ion-button>
+    </div>
+  </div>
+  }
+</ion-content>

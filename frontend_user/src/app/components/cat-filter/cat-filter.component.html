@@ -1,0 +1,18 @@
+<div class="categories-row">
+  @for (cat of categories; track cat.id) {
+  <div
+    class="category-item"
+    [class.selected]="selectedCategory === cat.id"
+    (click)="selectCategory(cat.id)"
+  >
+    <div class="category-logo-wrapper">
+      <img
+        src="assets/categoriesIcons/{{ cat.cat_code }}.png"
+        [alt]="cat.cat_name"
+        class="category-logo"
+      />
+    </div>
+    <div class="category-label">{{ cat.cat_name }}</div>
+  </div>
+  }
+</div>
